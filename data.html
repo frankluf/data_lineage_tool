@@ -20,12 +20,15 @@
         var table_margin_x = 20;
         var table_margin_y = 20;
         var table_width = 150;
+        var row_padding_x = 3;
         var row_height = 20;
 
         //origin_from: [origin_stage_index, origin_table_index, origin_field_index]
         var stage0_table0 = [
             {field: "linked_event_id", stage_index: 0, table_index: 0, field_index: 0, origin_from: [1, 0, 0]},
-            {field: "model_segment", stage_index: 0, table_index: 0, field_index: 0, origin_from: [[1, 1, 0], [1, 1, 0]]}
+            {field: "model_segment", stage_index: 0, table_index: 0, field_index: 0, origin_from: [[1, 1, 0], [1, 1, 0]]},
+            {field: "rlob", stage_index: 0, table_index: 0, field_index: 0, origin_from: []},
+            {field: "min_as_of_date", stage_index: 0, table_index: 0, field_index: 0, origin_from: []}
         ];
 
         var stage1_table0 = [
@@ -49,7 +52,21 @@
         var textX = stage0_x + table_margin_x + (table_width - table0_name_box.width) / 2;
         var textY = stage0_y + table_margin_y + (row_height - table0_name_box.height) / 2;
         table0_name.move(textX, textY);
+        stage0_table0.forEach(
+            (field, i) => {
+                var g = draw.group();
+                var rowBox = g.rect(table_width, row_height).move(stage0_x + table_margin_x, stage0_y + table_margin_y + (i + 1) * row_height).attr({fill: 'white', stroke: 'black'});
+                var rowText = g.text(field['field']).move(stage0_x + table_margin_x + row_padding_x, stage0_y + table_margin_y + (i + 1) * row_height + 2 ).font({family: 'Arial', size: 16});
 
+                g.mouseover(
+                    () => {rowBox.fill('lightblue');}
+                );
+
+                g.mouseout(
+                    () => {rowBox.fill('white');}
+                )
+            }
+        );
         
 
     </script>

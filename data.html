@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Lineage</title>
+    <style>
+        .hovered {
+            fill: rgb(54, 202, 34);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.1/svg.min.js"></script>
+</head>
+<body>
+    <div id="drawing" width="90%" height="70%"></div>
+
+    <script>
+        var stages_width = 300;
+        var stage_margin = 40;
+        var stage0_x = 40;
+        var stage0_y = 40;
+        var table_margin_x = 20;
+        var table_margin_y = 20;
+        var table_width = 150;
+        var row_height = 20;
+
+        //origin_from: [origin_stage_index, origin_table_index, origin_field_index]
+        var stage0_table0 = [
+            {field: "linked_event_id", stage_index: 0, table_index: 0, field_index: 0, origin_from: [1, 0, 0]},
+            {field: "model_segment", stage_index: 0, table_index: 0, field_index: 0, origin_from: [[1, 1, 0], [1, 1, 0]]}
+        ];
+
+        var stage1_table0 = [
+            {field: "linked_event_id", stage_index: 0, table_index: 0, field_index: 0, origin_from: []},
+            {field: "rlob", stage_index: 0, table_index: 0, field_index: 0, origin_from: []}
+        ];
+
+        var stage1_table1 = [
+            {field: "id", stage_index: 0, table_index: 0, field_index: 0, origin_from: []},
+            {field: "ms", stage_index: 0, table_index: 0, field_index: 0, origin_from: []}
+        ];
+
+        var draw = SVG().addTo('#drawing').size(800, 600);
+
+        var stage = draw.rect(stages_width, 600).attr({ fill: '#D3D3D3' }).move(stage0_x, stage0_y);
+        draw.rect(table_width, row_height).attr({ fill: 'lightgreen', stroke: 'black'}).move(stage0_x + table_margin_x, stage0_y + table_margin_y);
+        
+        //centralize the table name
+        var table0_name = draw.text("Table 1").font({size: 14, fill: 'black'});
+        var table0_name_box = table0_name.bbox();
+        var textX = stage0_x + table_margin_x + (table_width - table0_name_box.width) / 2;
+        var textY = stage0_y + table_margin_y + (row_height - table0_name_box.height) / 2;
+        table0_name.move(textX, textY);
+
+        
+
+    </script>
+    aaab
+</body>
+</html>

@@ -27,8 +27,8 @@
         var stage0_table0 = [
             {field: "linked_event_id", stage_index: 0, table_index: 0, field_index: 0, origin_table_count: 1, origin_from: [1, 0, 0]},
             {field: "model_segment", stage_index: 0, table_index: 0, field_index: 0, origin_table_count: 2, origin_from: [[1, 1, 0], [1, 1, 0]]},
-            {field: "rlob", stage_index: 0, table_index: 0, field_index: 0, origin_from: []},
-            {field: "min_as_of_date", stage_index: 0, table_index: 0, field_index: 0, origin_from: []}
+            {field: "rlob", stage_index: 0, table_index: 0, field_index: 0, origin_table_count: 0, origin_from: []},
+            {field: "min_as_of_date", stage_index: 0, table_index: 0, field_index: 0, origin_table_count: 0, origin_from: []}
         ];
 
         /*var stage1_table0 = [
@@ -76,15 +76,13 @@
                             console.log(i);
                             console.log(stageMap);
                             for (let key in stageMap) {
-                                console.log("hide()");
                                 stageMap[key].hide();
                             }
-                            
+
                             if (stageMap.hasOwnProperty(i)) {
-                                console.log("show svg group");
-                                setTimeout(function() {stageMap[i].show();}, 500); 
+                                setTimeout(function() {stageMap[i].show();}, 400); 
                             }else {
-                                console.log("no svg group");
+                                
                                 var g2 = draw.group();
                                 g2.rect(stages_width, 600).attr({ fill: '#D3D3D3' }).move(stage0_x + stages_width + stage_margin, stage0_y);
                                 g2.rect(table_width, row_height).attr({ fill: 'lightgreen', stroke: 'black'}).move(stage0_x + table_margin_x + stage_offset, stage0_y + table_margin_y);
